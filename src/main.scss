@@ -1,0 +1,1518 @@
+// color
+$color-primary: #134e91;
+$color-primary-light: #9cd8f0;
+$color-primary-dark: #a9a9b1;
+
+$color-secondary-light: #ffb900;
+$color-secondary-dark: #ff7730;
+
+$color-tertiary-light: #2998ff;
+$color-tertiary-dark: #5643fa;
+
+$color-pink-light: #f7ddf4;
+$color-pink-dark: #b4ddf0;
+
+$color-green-light: #7ed56f;
+$color-green-dark: #28b485;
+
+$color-grey-light-1: #f7f7f7;
+$color-grey-light-2: #eee;
+
+$color-grey-dark: #777;
+$color-grey-dark-2: #999;
+$color-grey-dark-3: #333;
+
+$color-white: #fff;
+$color-black: #000;
+$color-warn: rgb(99, 4, 4);
+$color-warn-light: rgb(228, 64, 64);
+
+// font
+$default-font-size: 1.6rem;
+
+// grid
+$grid-width: 114rem;
+$gutter-vertical: 8rem;
+$gutter-vertical-small: 6rem;
+$gutter-horizontal: 6rem;
+
+////////////////////////////////////
+////// abstracts //////////////////
+////////////////////////////////////
+@mixin clearfix {
+  &::after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+}
+
+@mixin absCenter {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+@font-face {
+  font-family: RobotoCondensed;
+  src: url(assets/roboto-condensed.light.ttf);
+  font-weight: 800;
+}
+
+@font-face {
+  font-family: EconomicaBold;
+  src: url(assets/economica-bold.ttf);
+}
+
+@mixin respond($breakpoint) {
+  @if $breakpoint == phone {
+    // 600px/16 = 37.5em
+    @media only screen and (max-width: 37.5em) {
+      @content;
+    }
+  }
+  @if $breakpoint == tab-port {
+    @media only screen and (max-width: 56.25em) {
+      @content;
+    }
+  }
+  @if $breakpoint == tab-land {
+    @media only screen and (max-width: 75em) {
+      @content;
+    }
+  }
+  @if $breakpoint == big-desktop {
+    // 1800px
+    @media only screen and (min-width: 112.5em) {
+      @content;
+    }
+  }
+}
+
+////////////////////////////////////
+////// animations //////////////////
+////////////////////////////////////
+
+@keyframes moveInLeft {
+  0% {
+    opacity: 0;
+    transform: translateX(-20rem); /*from left move in*/
+  }
+  40% {
+    transform: rotate(10deg);
+  }
+
+  80% {
+    transform: translateX(3rem);
+    transform: rotate(-1rem);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translate(0); /* mean look like right now*/
+  }
+}
+
+@keyframes moveInRight {
+  0% {
+    opacity: 0;
+    transform: translateX(20rem); /*from left move in*/
+  }
+  40% {
+    transform: rotate(10deg);
+  }
+
+  80% {
+    transform: translateX(-3rem);
+    transform: rotate(-1rem);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translate(0); /* mean look like right now*/
+  }
+}
+
+@keyframes moveInBottom {
+  0% {
+    opacity: 0;
+    transform: translateY(40rem);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translate(0);
+  }
+}
+
+////////////////////////////////////
+////// base  ///////////////////////
+////////////////////////////////////
+
+*,
+*::after,
+*::before {
+  margin: 0;
+  padding: 0;
+  box-sizing: inherit;
+}
+
+html {
+  // this defines what 1 rem is
+  font-size: 62.5%; /* 62.5% = 10px */
+
+  @include respond(tab-land) {
+    // width < 1200
+    font-size: 56.25%; // 1 rem = 9px, 9/16 = 50%
+  }
+
+  @include respond(tab-port) {
+    // width < 900
+    font-size: 50%; // 1 rem = 8px, 8/16 = 50%
+  }
+
+  @include respond(big-desktop) {
+    font-size: 75%; // 1 rem = 12, 12/16
+  }
+}
+
+// The box-sizing property allows us to include the padding and border in an element's total width and height.
+body {
+  box-sizing: border-box;
+  // nice
+  padding: 3rem; /* inherit from parent(html), so should be 30px */
+
+  @include respond(tab-port) {
+    padding: 0;
+  }
+}
+
+::selection {
+  background-color: $color-primary;
+  color: $color-white;
+}
+
+////////////////////////////////////
+////// typegraphy  /////////////////
+////////////////////////////////////
+body {
+  font-family: "Lato", sans-serif;
+  font-weight: 400;
+  //font-size: 1.6rem;
+  line-height: 1.7;
+  color: $color-grey-dark;
+}
+
+.heading-primary {
+  color: $color-white;
+  text-transform: uppercase;
+
+  backface-visibility: hidden; /* fix shaking */
+  margin-bottom: 6rem;
+
+  &--main {
+    display: block;
+    font-size: 7rem;
+    font-weight: 700;
+    letter-spacing: 30px;
+
+    animation-name: moveInLeft;
+    animation-duration: 1.5s;
+    animation-delay: 0.5s;
+    animation-timing-function: ease-out;
+
+    /*
+      animation-iteration-count: 2;
+      */
+    @include respond(phone) {
+      letter-spacing: 1rem;
+      font-family: 5rem;
+    }
+  }
+
+  &--sub {
+    display: block;
+    font-size: 3rem;
+    font-weight: 700;
+    letter-spacing: 1.4rem;
+    animation: moveInRight 1.5s 0.5s ease-out; /* short cut*/
+
+    @include respond(phone) {
+      letter-spacing: 0.5rem;
+    }
+  }
+}
+
+.heading-seconday {
+  font-size: 3.5rem;
+  text-transform: uppercase;
+  font-weight: 700;
+  display: inline-block;
+  background-image: linear-gradient(
+    to right,
+    $color-primary-light,
+    $color-primary-dark
+  );
+  -webkit-background-clip: text;
+  color: transparent;
+  letter-spacing: 0.2rem;
+  transition: all 0.2s;
+
+  @include respond(tab-port) {
+    font-size: 3rem;
+  }
+  @include respond(phone) {
+    font-size: 2.5rem;
+  }
+
+  &:hover {
+    transform: skewY(2deg) skewX(15deg) scale(1.1);
+    text-shadow: 0.5rem 1rem 2rem rgba($color-black, 0.4); //x directon 0.5, y direction 1, blur 2
+  }
+}
+.heading-dark {
+  font-size: 6rem;
+  text-transform: uppercase;
+  font-weight: 700;
+  display: inline-block;
+  background-image: linear-gradient(
+    to right,
+    $color-primary,
+    $color-tertiary-light
+  );
+  -webkit-background-clip: text;
+  color: transparent;
+  letter-spacing: 0.2rem;
+  transition: all 0.2s;
+
+  &:hover {
+    transform: skewY(2deg) skewX(15deg) scale(1.1);
+    text-shadow: 0.5rem 1rem 2rem rgba($color-black, 0.4); //x directon 0.5, y direction 1, blur 2
+  }
+}
+
+.heading-tertiary {
+  font-size: $default-font-size;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.paragraph {
+  font-size: $default-font-size;
+
+  &:not(:last-child) {
+    margin-bottom: 3rem;
+  }
+}
+
+////////////////////////////////////
+////// utilities  ///////////////////////
+////////////////////////////////////
+.u-center-text {
+  text-align: center !important;
+}
+
+.u-margin-bottom-small {
+  margin-bottom: 1.5rem !important;
+}
+
+.u-margin-bottom-medium {
+  margin-bottom: 4rem !important;
+
+  @include respond(tab-port) {
+    margin-bottom: 3rem !important;
+  }
+}
+
+.u-margin-bottom-big {
+  margin-bottom: 8rem !important;
+
+  @include respond(tab-port) {
+    margin-bottom: 5rem !important;
+  }
+}
+
+.u-margin-top-top {
+  margin-top: 8rem !important;
+}
+.u-margin-top-huge {
+  margin-top: 10rem !important;
+}
+
+////////////////////////////////////
+////// component  ///////////////////
+////////////////////////////////////
+.btn {
+  &,
+  &:link,
+  &:visited {
+    text-transform: uppercase;
+    text-decoration: none;
+    padding: 1.5rem 4rem;
+    display: inline-block;
+    border-radius: 10rem;
+    transition: all 0.2s;
+    position: relative;
+    font-size: $default-font-size;
+
+    // change for the <button> element
+    border: none;
+    cursor: pointer;
+  }
+
+  &:hover {
+    transform: translateY(-3px); /*move up*/
+    box-shadow: 0 20px 20px rgba($color-black, 0.5);
+    &::after {
+      transform: scaleX(1.4) scaleY(1.6);
+      opacity: 0;
+    }
+  }
+
+  &:active,
+  &:focus {
+    outline: none;
+    transform: translateY(-1px);
+    box-shadow: 0 5px 10px rgba($color-black, 0.3);
+  }
+
+  &--white {
+    background-color: $color-white;
+    color: $color-grey-dark;
+    &::after {
+      background-color: $color-white;
+    }
+  }
+
+  &--green {
+    background-color: $color-primary;
+    color: $color-white;
+
+    &::after {
+      background-color: $color-primary;
+    }
+  }
+
+  &--light {
+    background-color: $color-primary-light;
+    color: $color-white;
+
+    &::after {
+      background-color: $color-primary-light;
+    }
+  }
+
+  &::after {
+    content: ""; /*specifying content property is nedded*/
+    dispaly: inline-block;
+    height: 100%; /*same as parent(btn)*/
+    width: 100%; /*same as parent(btn)*/
+    border-radius: 10rem;
+    position: absolute; /*need reference(relative)*/
+    top: 0;
+    left: 0;
+    z-index: -1; /*behind the btn */
+    transition: all 0.4s; /*time of transform*/
+  }
+
+  &--animated {
+    animation: moveInBottom 1s 0.5s ease-out;
+    animation-fill-mode: backwards; /*apply stype up to 0% before animation start*/
+  }
+}
+
+.btn-text {
+  &:link,
+  &:visited {
+    font-size: $default-font-size;
+    color: $color-primary;
+    display: inline-block;
+    text-decoration: none;
+    border-bottom: 1px solid $color-primary;
+    padding: 3px;
+    transition: all 0.2s;
+  }
+
+  &:hover {
+    background-color: $color-primary;
+    color: $color-white;
+    box-shadow: 0 1rem 2rem rgba($color-black, 0.3);
+    transform: translateY(-2px);
+  }
+
+  &:active {
+    box-shadow: 0 0.5rem 1rem rgba($color-black, 0.3);
+    transform: translateY(0);
+  }
+}
+
+.card {
+  perspective: 120rem;
+  -moz-perspective: 120rem;
+  position: relative;
+  height: 52rem;
+
+  &__side {
+    height: 52rem;
+    transition: all 0.8s ease;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%; // because we have absolute position here, width of 100% is not automatically applied to the block element,
+    -webkit-backface-visibility: hidden; // important
+    backface-visibility: hidden; // important
+    border-radius: 5px;
+    box-shadow: 0 1.5rem 4rem rgba($color-black, 0.25);
+
+    &--front {
+      background-color: $color-white;
+    }
+
+    &--back {
+      transform: rotateY(180deg);
+
+      &-1 {
+        background-image: linear-gradient(
+          to right bottom,
+          $color-secondary-light,
+          $color-secondary-dark
+        );
+      }
+
+      &-2 {
+        background-image: linear-gradient(
+          to right bottom,
+          $color-green-light,
+          $color-green-dark
+        );
+      }
+
+      &-3 {
+        background-image: linear-gradient(
+          to right bottom,
+          $color-tertiary-light,
+          $color-tertiary-dark
+        );
+      }
+    }
+  }
+
+  // when we hover the card, the card__side--front will be transformed
+  //.card:hover .card__side {}
+  &:hover &__side--front {
+    transform: rotateY(-180deg);
+  }
+
+  &:hover &__side--back {
+    transform: rotateY(0);
+  }
+
+  // front side styling
+  &__picture {
+    background-size: cover;
+    height: 23rem;
+    background-blend-mode: screen;
+    -webkit-clip-path: polygon(
+      0 0,
+      100% 0,
+      100% 85%,
+      0 100%
+    ); // different browser
+    clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+
+    &--1 {
+      background-image: linear-gradient(
+          to right bottom,
+          $color-secondary-light,
+          $color-secondary-dark
+        ),
+        url(./assets/man.jpg);
+    }
+
+    &--2 {
+      background-image: linear-gradient(
+          to right bottom,
+          $color-green-light,
+          $color-green-dark
+        ),
+        url(./assets/man.jpg);
+    }
+
+    &--3 {
+      background-image: linear-gradient(
+          to right bottom,
+          $color-tertiary-light,
+          $color-tertiary-dark
+        ),
+        url(./assets/man.jpg);
+    }
+  }
+
+  &__heading {
+    font-size: 2.8rem;
+    font-weight: 300;
+    text-transform: uppercase;
+    text-align: right;
+    color: $color-white;
+    position: absolute;
+    top: 12rem;
+    right: 2rem;
+    width: 75%;
+  }
+
+  &__heading-span {
+    padding: 1rem 1.5rem;
+    -webkit-box-decoration-break: clone; // two element have same style
+    box-decoration-break: clone;
+
+    &--1 {
+      background-image: linear-gradient(
+        to right bottom,
+        rgba($color-secondary-light, 0.85),
+        rgba($color-secondary-dark, 0.85)
+      );
+    }
+    &--2 {
+      background-image: linear-gradient(
+        to right bottom,
+        rgba($color-green-light, 0.85),
+        rgba($color-green-dark, 0.85)
+      );
+    }
+    &--3 {
+      background-image: linear-gradient(
+        to right bottom,
+        rgba($color-tertiary-light, 0.85),
+        rgba($color-tertiary-dark, 0.85)
+      );
+    }
+  }
+
+  &__details {
+    padding: 3rem;
+    ul {
+      list-style: none;
+      width: 80%;
+      margin: 0 auto; // center block element in the block element
+
+      li {
+        text-align: center;
+        font-size: 1.5rem;
+        padding: 1rem;
+
+        &:not(:last-child) {
+          border-bottom: 1px solid $color-grey-light-2;
+        }
+      }
+    }
+  }
+
+  // back side styling
+  &__cta {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 90%;
+    text-align: center;
+  }
+
+  &__price-box {
+    text-align: center;
+    color: $color-white;
+    margin-bottom: 8rem;
+  }
+
+  &__price-only {
+    font-size: 1.4rem;
+    text-transform: uppercase;
+  }
+
+  &__price-value {
+    font-size: 6rem;
+    font-weight: 100;
+  }
+
+  //@include respond(tab-port) {
+  @media only screen and (max-width: 56.25em), only screen and (hover: none) {
+    height: auto;
+    border-radius: 5px;
+    background-color: $color-white;
+    box-shadow: 0 1.5rem 4rem rgba($color-black, 0.25);
+
+    &__side {
+      height: auto;
+      position: relative;
+      box-shadow: none;
+
+      &--back {
+        transform: rotateY(0);
+        clip-path: polygon(0 15%, 100% 0, 100% 100%, 0 100%);
+      }
+    }
+
+    &:hover &__side--front {
+      transform: rotateY(0);
+    }
+
+    &__details {
+      padding: 1rem 3rem;
+    }
+
+    // back side styling
+    &__cta {
+      position: relative;
+      top: 0%;
+      left: 0%;
+      transform: translate(0);
+      width: 100%;
+      padding: 7rem 4rem 4rem 4rem;
+    }
+
+    &__price-box {
+      margin-bottom: 3rem;
+    }
+
+    &__price-value {
+      font-size: 4rem;
+    }
+  }
+}
+
+.composition {
+  position: relative;
+
+  &__photo {
+    width: 55%;
+    box-shadow: 0 1.5rem 4rem rgba($color-black, 0.4);
+    border-radius: 2px;
+    position: absolute;
+    z-index: 10;
+    transition: all 0.2s;
+    outline-offset: 2rem;
+
+    @include respond(tab-port) {
+      float: left;
+      position: relative;
+      width: 33.333333%;
+      box-shadow: 0 1.5rem 3rem rgba($color-black, 0.3);
+    }
+
+    &--p1 {
+      left: 0;
+      top: -2rem;
+
+      @include respond(tab-port) {
+        top: 0;
+        transform: scale(1.2);
+      }
+    }
+
+    &--p2 {
+      right: 0;
+      top: 2rem;
+
+      @include respond(tab-port) {
+        top: -1rem;
+        transform: scale(1.3);
+        z-index: 100;
+      }
+    }
+
+    &--p3 {
+      left: 20%;
+      top: 11rem;
+
+      @include respond(tab-port) {
+        top: 1rem;
+        left: 0;
+        transform: scale(1.1);
+      }
+    }
+
+    &:hover {
+      outline: 1.5rem solid $color-primary-light;
+      transform: scale(1.1) translateY(-0.5rem);
+      box-shadow: 0 2.5rem 4rem rgba($color-black, 0.6);
+      z-index: 20;
+    }
+  }
+
+  // select element which not hover
+  // composition:hover composition__photo:not(:hover) {...}
+  &:hover &__photo:not(:hover) {
+    transform: scale(0.9);
+  }
+}
+
+.feature-box {
+  background-color: rgba($color-white, 0.8);
+  font-size: 1.5rem;
+  padding: 2.5rem;
+  text-align: center;
+  border-radius: 1rem;
+  box-shadow: 0 1.5rem 4rem rgba($color-black, 0.15);
+  transition: transform 0.3s;
+
+  @include respond(tab-port) {
+    padding: 2rem;
+  }
+
+  &__icon {
+    font-size: 6rem;
+    margin-bottom: 0.5rem;
+    display: inline-block;
+    background-image: linear-gradient(
+      to right,
+      $color-primary-light,
+      $color-primary-dark
+    );
+    -webkit-background-clip: text;
+    color: transparent;
+
+    @include respond(tab-port) {
+      margin-bottom: 0;
+    }
+  }
+
+  &:hover {
+    transform: translateY(-1.5rem) scale(1.05);
+  }
+}
+.form {
+  &__group:not(:last-child) {
+    margin-bottom: 2rem;
+  }
+
+  &__input {
+    font-size: 1.5rem;
+    font-family: inherit;
+    color: inherit;
+    padding: 1.5rem 2rem;
+    border-radius: 2px;
+    background-color: rgba($color-white, 0.5);
+    border: none;
+    border-bottom: 3px solid transparent;
+    width: 90%;
+    display: block;
+    transition: all 0.3s;
+
+    @include respond(tab-port) {
+      width: 100%;
+    }
+
+    &:focus {
+      outline: none;
+      box-shadow: 0 1rem 2rem rgba($color-black, 0.2);
+      border-bottom: 3px solid $color-primary;
+    }
+
+    &:focus:invalid {
+      border-bottom: 3px solid $color-secondary-dark;
+    }
+
+    // :: mean thing on the web page, like placeholder
+    &::-webkit-input-placeholder {
+      color: $color-grey-dark-2;
+    }
+  }
+
+  &__label {
+    font-size: 1.2rem;
+    font-weight: 700;
+    margin-left: 2rem;
+    margin-top: 0.7rem;
+    display: block;
+    transition: all 0.3s;
+  }
+
+  // when placeholder is shown, mean we write nothing, we want ladel to be hidden
+  // + sibling selector, which only select next one
+  &__input:placeholder-shown + &__label {
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-4rem);
+  }
+
+  &__radio-group {
+    width: 49%;
+    display: inline-block;
+
+    @include respond(tab-port) {
+      width: 100%;
+      margin-bottom: 2rem;
+    }
+  }
+
+  &__radio-input {
+    display: none;
+  }
+
+  &__radio-label {
+    font-size: $default-font-size;
+    cursor: pointer;
+    position: relative;
+    padding-left: 4.5rem;
+  }
+
+  &__radio-button {
+    height: 3rem;
+    width: 3rem;
+    border: 5px solid $color-primary-light;
+    border-radius: 50%;
+    display: inline-block;
+    position: absolute;
+    left: 0;
+    top: 0;
+    top: 0;
+    top: -0.4rem;
+
+    // inside small btn
+    &::after {
+      content: "";
+      background-color: $color-primary-light;
+      display: block;
+      height: 1.3rem;
+      width: 1.3rem;
+      border-radius: 50%;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      opacity: 0;
+      transition: opacity 0.2s;
+    }
+  }
+
+  // if we select radio input, the inside samll btn will be selected
+  &__radio-input:checked ~ &__radio-label &__radio-button::after {
+    opacity: 1;
+  }
+}
+
+//////////////////////////////////////////
+/////////// layout ///////////////////////
+//////////////////////////////////////////
+.footer {
+  background-color: $color-grey-dark-3;
+  padding: 10rem 0;
+  font-size: 1.4rem;
+  color: $color-grey-light-1;
+
+  @include respond(tab-port) {
+    padding: 8rem 0;
+  }
+
+  &__logo-box {
+    text-align: center; // img is inline element, like text
+    margin-bottom: 8rem;
+
+    @include respond(tab-port) {
+      margin-bottom: 4rem;
+    }
+  }
+
+  &__logo {
+    width: 15rem;
+    height: auto;
+  }
+
+  &__navigation {
+    border-top: 1px solid $color-grey-dark;
+    padding-top: 2rem;
+    display: inline-block; // inline block does not occupy 100% of its available width, only the one that content needs.
+
+    @include respond(tab-port) {
+      width: 100%;
+      text-align: center;
+    }
+  }
+
+  &__list {
+    list-style: none;
+  }
+
+  &__item {
+    display: inline-block;
+
+    &:not(:last-child) {
+      margin-right: 1.5rem;
+    }
+  }
+
+  &__link {
+    &:link,
+    &:visited {
+      color: $color-grey-light-1;
+      background-color: $color-grey-dark-3;
+      text-decoration: none;
+      text-transform: uppercase;
+      display: inline-block;
+      transition: all 0.2s;
+    }
+
+    &:hover,
+    &:active {
+      color: $color-green-light;
+      box-shadow: 0 1rem 2rem rgba($color-black, 0.4);
+      transform: rotate(5deg) scale(1.3);
+    }
+  }
+
+  &__copyright {
+    border-top: 1px solid $color-grey-dark;
+    padding-top: 2rem;
+    width: 80%;
+    float: right;
+
+    @include respond(tab-port) {
+      width: 100%;
+      float: none;
+    }
+  }
+}
+
+.row {
+  max-width: $grid-width;
+  margin: 0 auto;
+
+  //.row:not(:last-child) mean everything except last element
+  &:not(:last-child) {
+    margin-bottom: $gutter-vertical;
+
+    @include respond(tab-port) {
+      margin-bottom: 15rem;
+    }
+  }
+
+  @include respond(tab-port) {
+    max-width: 50rem;
+    padding: 0 3rem;
+  }
+
+  @include clearfix; // .row::after {...}
+
+  // attribute selector: select all element start with(^) col-
+  [class^="col-"] {
+    float: left;
+
+    &:not(:last-child) {
+      margin-right: $gutter-horizontal;
+
+      @include respond(tab-port) {
+        margin-right: 0;
+        margin-bottom: $gutter-vertical-small;
+      }
+    }
+
+    @include respond(tab-port) {
+      width: 100% !important;
+    }
+  }
+
+  .col-1-of-2 {
+    width: calc((100% - #{$gutter-horizontal}) / 2);
+  }
+
+  .col-1-of-3 {
+    width: calc((100% - 2 * #{$gutter-horizontal}) / 3);
+  }
+
+  .col-2-of-3 {
+    width: calc(
+      2 * ((100% - 2 * #{$gutter-horizontal}) / 3) + #{$gutter-horizontal}
+    );
+  }
+
+  .col-1-of-4 {
+    width: calc((100% - 3 * #{$gutter-horizontal}) / 4);
+  }
+
+  .col-2-of-4 {
+    width: calc(
+      2 * ((100% - 3 * #{$gutter-horizontal})) / 4 + #{$gutter-horizontal}
+    );
+  }
+
+  .col-3-of-4 {
+    width: calc(
+      3 * ((100% - 3 * #{$gutter-horizontal})) / 4 + 2 * #{$gutter-horizontal}
+    );
+  }
+}
+
+.header {
+  height: 85vh; /* the height of this element should be 95% of viewport height*/
+  background-image: linear-gradient(
+      to right bottom,
+      rgba($color-primary-light, 0.5),
+      rgba($color-primary-dark, 0.5)
+    ),
+    url(./assets/new_background.jpg);
+  background-size: cover; /*try to fix image into header*/
+  background-position: top;
+  position: relative;
+
+  @supports (clip-path: polygon(0 0)) or (webkit-clip-path: polygon(0 0)) {
+    -webkit-clip-path: polygon(0 0, 100% 0, 100% 75vh, 0 100%);
+    clip-path: polygon(0 0, 100% 0, 100% 75vh, 0 100%);
+    height: 95vh;
+  }
+
+  @include respond(phone) {
+    -webkit-clip-path: polygon(0 0, 100% 0, 100% 85vh, 0 100%);
+    clip-path: polygon(0 0, 100% 0, 100% 85vh, 0 100%);
+  }
+
+  &__logo-box {
+    position: absolute;
+    top: 4rem;
+    left: 4rem;
+  }
+
+  &__logo {
+    height: 7rem;
+  }
+
+  &__text-box {
+    position: absolute;
+    top: 40%; /*50% top from parent*/
+    left: 50%; /*50% left from parent*/
+    transform: translate(-50%, -50%); /*shift -50% itself*/
+    text-align: center;
+    width: 70%;
+  }
+}
+
+.navigation {
+  &__checkbox {
+    display: none;
+  }
+
+  &__button {
+    background-color: $color-white;
+    height: 7rem;
+    width: 7rem;
+    position: fixed;
+    top: 6rem;
+    right: 6rem;
+    border-radius: 50%;
+    z-index: 2000;
+    box-shadow: 0 1rem 3rem rgba($color-black, 0.2);
+    text-align: center;
+    cursor: pointer;
+
+    @include respond(tab-port) {
+      top: 4rem;
+      right: 4rem;
+    }
+
+    @include respond(phone) {
+      top: 3rem;
+      right: 3rem;
+    }
+  }
+
+  &__background {
+    height: 6rem;
+    width: 6rem;
+    border-radius: 50%;
+    position: fixed; // take element out of flow
+    top: 6.5rem;
+    right: 6.5rem;
+    background-image: radial-gradient(
+      $color-primary-light,
+      $color-primary-dark
+    ); // outside darker
+    z-index: 1000;
+    transition: transform 0.8s cubic-bezier(0.86, 0, 0.07, 1);
+
+    @include respond(tab-port) {
+      top: 4.5rem;
+      right: 4.5rem;
+    }
+
+    @include respond(phone) {
+      top: 3.5rem;
+      right: 3.5rem;
+    }
+  }
+
+  &__nav {
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    right: 0;
+    z-index: 1500;
+
+    opacity: 0;
+    width: 0;
+    transition: all 0.8s cubic-bezier(0.86, 0, 0.07, 1);
+  }
+
+  &__list {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    list-style: none;
+    text-align: center;
+    width: 100%;
+  }
+
+  &__item {
+    margin: 1rem;
+  }
+
+  &__link {
+    &:link,
+    &:visited {
+      display: inline-block; // actually apply padding in this case
+      font-size: 3rem;
+      font-weight: 300;
+      padding: 1rem 2rem;
+      color: $color-white;
+      text-decoration: none;
+      text-transform: uppercase;
+      background-image: linear-gradient(
+        120deg,
+        transparent 0%,
+        transparent 50%,
+        $color-white 50%
+      );
+      background-size: 220%;
+      transition: all 0.4s;
+
+      span {
+        margin-right: 1.5rem;
+        display: inline-block;
+      }
+    }
+
+    &:hover,
+    &:active {
+      background-position: 100%;
+      color: $color-primary;
+      transform: translateX(1.5rem);
+    }
+  }
+
+  // when checkbox is checked, background scale
+  &__checkbox:checked ~ &__background {
+    transform: scale(80);
+  }
+
+  &__checkbox:checked ~ &__nav {
+    opacity: 1;
+    width: 100%;
+  }
+
+  // icon
+  &__icon {
+    position: relative;
+    margin-top: 3.3rem;
+
+    &,
+    &::before,
+    &::after {
+      width: 3rem;
+      height: 2px;
+      background-color: $color-grey-dark-3;
+      display: inline-block;
+    }
+
+    &::before,
+    &::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      transition: all 0.2s;
+    }
+
+    &::before {
+      top: -0.8rem;
+    }
+    &::after {
+      top: 0.8rem;
+    }
+  }
+
+  &__button:hover &__icon::before {
+    top: -1rem;
+  }
+  &__button:hover &__icon::after {
+    top: 1rem;
+  }
+
+  &__checkbox:checked + &__button &__icon {
+    background-color: transparent;
+  }
+
+  &__checkbox:checked + &__button &__icon::before {
+    top: 0;
+    transform: rotate(135deg);
+  }
+
+  &__checkbox:checked + &__button &__icon::after {
+    top: 0;
+    transform: rotate(-135deg);
+  }
+}
+
+///////////////////////////////////
+///////// pages //////////////////
+///////////////////////////////////
+
+article.checkout {
+  display: flex;
+  flex-direction: column;
+  font-size: 2rem;
+  color: $color-grey-dark;
+
+  label {
+    span {
+      font-weight: bold;
+      color: $color-black;
+    }
+  }
+}
+
+.confirmation {
+  font-size: 2rem;
+  margin-bottom: 3rem;
+  p {
+    span {
+      font-weight: bold;
+      color: $color-black;
+    }
+  }
+}
+
+.section-about {
+  background-color: $color-grey-light-1;
+  padding: 25rem 0;
+  margin-top: -20vh; // move up
+  height: 100rem;
+
+  @include respond(tab-port) {
+    padding: 20rem 0;
+  }
+}
+
+.section-features {
+  padding: 20rem 0;
+  background-image: linear-gradient(
+      to right bottom,
+      rgba($color-primary-light, 0.5),
+      rgba($color-primary-dark, 0.5)
+    ),
+    url(./assets/new_background.jpg);
+  background-size: cover;
+  transform: skewY(-7deg);
+  margin-top: -10rem;
+
+  // select direct child(first child)
+  // .section-features *
+  & > * {
+    transform: skewY(7deg);
+  }
+
+  @include respond(tab-port) {
+    padding: 10rem 0;
+  }
+}
+
+.section-tours {
+  background-color: $color-grey-light-1;
+  padding: 25rem 0 15rem 0;
+  margin-top: -10rem;
+
+  @include respond(tab-port) {
+    padding: 20rem 0 10rem 0;
+  }
+}
+
+.section-stories {
+  position: relative;
+  padding: 15rem 0;
+
+  @include respond(tab-port) {
+    padding: 10rem 0;
+  }
+}
+
+.section-book {
+  padding: 15rem 0;
+  background-image: linear-gradient(
+    to right bottom,
+    $color-pink-dark,
+    $color-pink-light
+  );
+
+  @include respond(tab-port) {
+    padding: 10rem 0;
+  }
+}
+
+.book {
+  background-image: linear-gradient(
+      105deg,
+      rgba($color-white, 0.8) 0%,
+      rgba($color-white, 0.8) 50%,
+      transparent 50%
+    ),
+    url(./assets/booking.jpg);
+  background-size: 100%;
+  border-radius: 0.5rem;
+  box-shadow: 0 1.5rem 4rem rgba($color-black, 0.2);
+
+  @include respond(tab-land) {
+    background-image: linear-gradient(
+        105deg,
+        rgba($color-white, 0.8) 0%,
+        rgba($color-white, 0.8) 65%,
+        transparent 65%
+      ),
+      url(./assets/booking.jpg);
+    background-size: cover;
+  }
+
+  @include respond(tab-port) {
+    background-image: linear-gradient(
+        to right,
+        rgba($color-white, 0.8) 0%,
+        rgba($color-white, 0.8) 100%
+      ),
+      url(./assets/booking.jpg);
+  }
+
+  &__form {
+    width: 50%;
+    padding: 6rem;
+
+    @include respond(tab-land) {
+      width: 65%;
+    }
+
+    @include respond(tab-land) {
+      width: 100%;
+    }
+  }
+}
+
+.order {
+  height: 100vh;
+  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: rgba($color-black, 0.7);
+  @supports (-webkit-backdrop-filter: blur(10px)) or
+    (backdrop-filter: blur(10px)) {
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+    background-color: rgba($color-black, 0.3);
+  }
+
+  &__content {
+    @include absCenter;
+
+    width: 75%;
+    background-color: $color-white;
+    box-shadow: 0 2rem 4rem rgba($color-black, 0.2);
+    border-radius: 3px;
+    display: table;
+    overflow: hidden;
+
+    @include respond(tab-land) {
+      width: auto;
+    }
+    @include respond(tab-port) {
+      width: auto;
+    }
+    @include respond(phone) {
+      display: block;
+      position: relative;
+    }
+  }
+
+  &__form {
+    display: flex;
+    flex-direction: column;
+    font-size: 2rem;
+
+    &__element {
+      display: flex;
+      margin-bottom: 1rem;
+
+      label {
+      }
+      input {
+        flex: 1;
+        background-color: lightgoldenrodyellow;
+      }
+    }
+
+    &__submit {
+      display: flex;
+      margin-top: 2rem;
+      font-weight: 600;
+      input {
+        background-color: $color-primary;
+        padding: 1rem 2rem;
+        border-radius: 0.5rem;
+        color: $color-white;
+        font-size: 2rem;
+        margin-right: 2rem;
+        font-weight: inherit;
+        cursor: pointer;
+
+        &:hover {
+          background-color: $color-tertiary-light;
+        }
+      }
+
+      a {
+        background-color: $color-warn;
+        padding: 1rem 2rem;
+        border-radius: 0.5rem;
+        color: $color-white;
+        font-size: 2rem;
+        text-decoration: none;
+        &:hover {
+          background-color: $color-warn-light;
+        }
+      }
+    }
+  }
+
+  &__left {
+    width: 33.333333%;
+    display: table-cell;
+
+    @include respond(tab-port) {
+      vertical-align: middle;
+    }
+    @include respond(phone) {
+      display: block;
+    }
+  }
+
+  &__right {
+    width: 66.6666667%;
+    display: table-cell;
+    vertical-align: middle;
+    padding: 3rem 5rem;
+  }
+
+  &__img {
+    display: block;
+    width: 100%;
+
+    @include respond(phone) {
+      display: none;
+    }
+  }
+}
