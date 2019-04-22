@@ -4,7 +4,7 @@ self.__precacheManifest = [
     "url": "/sing-color-frontend-demo/static/media/pic-3.a6ff162a.jpg"
   },
   {
-    "revision": "61dbdb3809c5cd98b168",
+    "revision": "875409b5e9e953c9d2db",
     "url": "/sing-color-frontend-demo/static/css/main.c1f766f6.chunk.css"
   },
   {
@@ -28,8 +28,8 @@ self.__precacheManifest = [
     "url": "/sing-color-frontend-demo/static/media/pic-2.b095caf6.jpg"
   },
   {
-    "revision": "61dbdb3809c5cd98b168",
-    "url": "/sing-color-frontend-demo/static/js/main.24a45b2e.chunk.js"
+    "revision": "875409b5e9e953c9d2db",
+    "url": "/sing-color-frontend-demo/static/js/main.6041e1b6.chunk.js"
   },
   {
     "revision": "8262057119c963741b868e0d8dd68dd3",
@@ -52,7 +52,7 @@ self.__precacheManifest = [
     "url": "/sing-color-frontend-demo/static/media/man.3acfc980.jpg"
   },
   {
-    "revision": "9b41085cc8f25006d964cb734804e012",
+    "revision": "d795221f976a7b3f9d8fd66134173337",
     "url": "/sing-color-frontend-demo/index.html"
   }
 ];

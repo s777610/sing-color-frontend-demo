@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/3.6.3/workbox-sw.js");
 
 importScripts(
-  "/sing-color-frontend-demo/precache-manifest.0703dfd14db537bf95f44b1a7b3399a3.js"
+  "/sing-color-frontend-demo/precache-manifest.c6c5d53571482b58b25b6a54485374fb.js"
 );
 
 workbox.clientsClaim();
