@@ -34,7 +34,7 @@ const Book = () => {
                   <p className="card__price-only">單字只要</p>
                   <p className="card__price-value">$180起</p>
                 </div>
-                <a href="/" className="btn btn--white">
+                <a href="#header" className="btn btn--white">
                   下單
                 </a>
               </div>
@@ -66,7 +66,7 @@ const Book = () => {
                   <p className="card__price-only">字串只要</p>
                   <p className="card__price-value">$420起</p>
                 </div>
-                <a href="/" className="btn btn--white">
+                <a href="#header" className="btn btn--white">
                   下單
                 </a>
               </div>
@@ -98,7 +98,7 @@ const Book = () => {
                   <p className="card__price-only">6字只要</p>
                   <p className="card__price-value">$1060起</p>
                 </div>
-                <a href="/" className="btn btn--white">
+                <a href="#header" className="btn btn--white">
                   下單
                 </a>
               </div>
